@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+          <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+          <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+          <link rel="stylesheet" href="{% static 'app/css/nouislider.min.css' %}">
+          <link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css' %}">
+          <link rel="stylesheet" href="{% static 'app/css/bootstrap-5.1.3/dist/css/bootstrap.min.css' %}">
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+          <link href="{% static 'app/css/css/font-awesome.min.css' %}" rel="stylesheet" />
+          <link href="{% static 'app/css/css/style.css' %}" rel="stylesheet" />
+          <link href="{% static 'app/css/css/responsive.css' %}" rel="stylesheet" />
+          <link rel="stylesheet" href="{% static 'ap/csss/bootstrap.css' %}">
+          <link rel="stylesheet" href="{% static 'app/csss/style.css' %}">
+          <link rel="stylesheet" href="{% static 'app/csss/flaticon.css' %}">
+          <link rel="stylesheet" href="{% static 'app/csss/styles.css' %}">
+          <title>I_Bikao | {% block title %}{% endblock title %} </title>
+</head>
+<body>
+
+    
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                    
+                    <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                         aria-expanded="false">Products</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'category' 'AK' %}">Akanjo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'category' 'PT' %}">pataloa</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'category' 'KR' %}">kiraro</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'category' 'ST' %}">satroka</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'category' 'RB' %}">robe</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact' %}">Cantact Us</a>
+                    </li>
+                </ul>
+                
+                <ul class="header-links pull-right">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item submenu dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#"
+                        id="profileDropdown" role="button" data-toggle="dropdown" aria-expanded="false" >{{request.user}}</a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'passwordchange' %}">Change Password</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                            
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'customerregistration' %}">Registrationt</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div class="top-header" style="background: rgb(6, 40, 59)">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <img style="margin-top: 18px;" src="{% static "app/images/Logo_boutique de mode_i-bikao_claire_01.png" %}" alt="" width="120px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-6" style="top: 10px;">
+                        
+                        <div class="header-search">
+                            <form class="d-flex" action="/search">
+                                <input style="background-color: transparent;height: 35px " class="form-control me-2" type="search" name="search" placeholder="Search">
+                                <button style="height: 35px" class="btn btn-primary" type="submit">Search</button>
+                                </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 clearfix" style="margin-top: 20px;">
+                        <div class="header-ctn">
+                            <div>
+                                <a href="#">
+                                    <i class="fa fa-heart"></i>
+                                    <div class="qty">{% if wishitem > 0 %} {{wishlist}} {% endif %}</div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'showcart' %}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <div class="qty">{% if totalitem > 0 %} {{totalitem}} {% endif %}</div>
+                                </a>
+                            </div>
+
+                            
+                            <!-- /Cart -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+		
+
+         
+
+          {% block image_slider %}{% endblock image_slider %}
+
+          {% block information %}{% endblock information %}
+          {% block main-content %}{% endblock main-content %}
+
+          <footer style="background: rgb(6, 40, 59); color: white; font-size: 12px" class="container-fluid fixed-bottom text-center p-2 mt-5">
+                    Copyright : 2024 || Tsiferaniana Angelot by : I_Bikao Boutique
+          </footer>
+             
+          <div id="chat-button" onclick="toggleChat()">Chat</div>
+
+          <div id="chat-container" class="closed">
+              <div id="chat-output"></div>
+              <input type="text" id="chat-input" placeholder="Posez une question...">
+              <button onclick="sendUserMessage()">Envoyer</button>
+          </div>
+          
+          <script>
+              function toggleChat() {
+                  var chatContainer = document.getElementById("chat-container");
+                  chatContainer.classList.toggle("closed");
+              }
+          
+              function sendUserMessage() {
+                  var userInput = document.getElementById("chat-input").value;
+                  if (userInput.trim() !== "") {
+                      appendMessage("Vous : " + userInput, "user");
+                      processBotResponse(userInput);
+                      document.getElementById("chat-input").value = "";
+                  }
+              }
+          
+              function appendMessage(message, sender) {
+                  var chatOutput = document.getElementById("chat-output");
+                  var newMessage = document.createElement("p");
+                  newMessage.className = sender;
+                  newMessage.innerHTML = message;
+                  chatOutput.appendChild(newMessage);
+                  chatOutput.scrollTop = chatOutput.scrollHeight;
+              }
+          
+              function processBotResponse(userInput) {
+                  if (userInput.toLowerCase().includes("manao livraison ve")) {
+                      appendMessage("I_Bikao : yeny tompoko, manao livraison amin'ny faritra ihany koa, alefaso ny commande nao", "bot");
+                  } else if (userInput.toLowerCase().includes("prix de livraison?")) {
+                      appendMessage("I_Bikao : arakarakany tompoko, raha eto amin'ny faritra vakinakaratra sy Analamanga dia gratuit", "bot");
+                  }else if (userInput.toLowerCase().includes("azo antoka tsara ve ny livraison amin'ny faritra")) {
+                    appendMessage("I_Bikao : yeny tompoko azo antoka tsara ny livraison ato amin'ny boutique I_Bikao", "bot");
+                 }else if (userInput.toLowerCase().includes("misy promotion matetika ve")) {
+                    appendMessage("I_Bikao : araho hatrany ny site I_bikao.com fa maro ny promotion ato aminay, maro iany koa ny kilalao izay azahoana loka ", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("aiza kay no misy anareo azafady")) {
+                    appendMessage("I_Bikao : ety ankatovato izahay tompoko apitan'ny Glad Touche", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("misokatra fona ve isan'andro")) {
+                    appendMessage("I_Bikao : lundi katramin'ny samedi tompoko izahay no misokatra, ary am 8 ora maraina katramin'ny 5 ora ariva", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("yeny ary tompoko")) {
+                    appendMessage("I_Bikao : mankasitraka anao izahay ato amin'ny Boutique Ibikao ry <h1>{{request.user}}</h1>", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("makasitraka tompoko fa tonga ny livraison")) {
+                    appendMessage("I_Bikao : yeny tompoko ianao no isaorana, aza misalasala raha mbola mila fanampiana ato amin'ny Boutique I_bikao", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("je t'aime")) {
+                    appendMessage("I_Bikao : Mialatsina ry <h1>{{request.user}}</h1> fa boutique ny ato fa tsy fikotina sipa", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("manao livraison isan'andro ve")) {
+                    appendMessage("I_Bikao : manao livraison isan'andro izahay tompoko", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("vaovao")) {
+                    appendMessage("I_Bikao : tsy misy vaovao ry <h1>{{request.user}}</h1> fa inona no azo hanampiana anao", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("mba anaovana akanjo")) {
+                    appendMessage("I_Bikao : alefaso ny commandenao ary tompoko", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("mba anaovana kloty")) {
+                    appendMessage("I_Bikao : alefaso ny commandenao ary tompoko", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("mba anaovana satroka")) {
+                    appendMessage("I_Bikao : alefaso ny commandenao ary tompoko", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("firy tona mireille")) {
+                    appendMessage("I_Bikao : izy dia andray 18 amin'ny octobre", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("aiza izy no mianatra")) {
+                    appendMessage("I_Bikao : mbola tsy mianatra fa midoga fustn", "bot");
+                 }
+                 else if (userInput.toLowerCase().includes("zan ve")) {
+                    appendMessage("I_Bikao : yekaa", "bot");
+                 }else if (userInput.toLowerCase().includes("firy tona vanio")) {
+                    appendMessage("I_Bikao : 2ans vanio kely bogosy", "bot");
+                 }
+                   else {
+                      appendMessage("I_Bikao : Bonjour <h1>{{request.user}}</h1> faly mandray anao izahay Ibikao Boutique, inona no azo hanampiana anao, mba ahafahanay mamaly ny message nao dia mba ataovy mazava trara ny teninao azafady ", "bot");
+                  }
+              }
+          
+              window.onload = function () {
+                  processBotResponse("Bonjour");
+              };
+              
+          </script>
+          
+    <style>
+       
+        
+        #chat-output {
+            height: 200px;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+        
+        .user {
+            color: #fff; /* Couleur du texte utilisateur */
+            background-color: #007bff; /* Couleur de fond utilisateur */
+            padding: 8px;
+            border-radius: 5px;
+            margin-left: 80px;
+            margin-bottom: 5px;
+            max-width: 70%;
+        }
+        
+        .bot {
+            color: #fff; /* Couleur du texte du chatbot */
+            background-color: #5c5a59; /* Couleur de fond du chatbot */
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            max-width: 70%;
+        }
+        
+        #chat-input {
+            width: calc(100% - 20px);
+            padding: 5px;
+            background-color: transparent;
+            color: #fff;
+        }
+        
+        #chat-container button {
+            width: 100%;
+            padding: 8px;
+            background-color: rgb(6, 40, 59);
+            color: white;
+            border: none;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+        }
+        
+        #chat-container button:hover {
+            background-color: #45a049;
+        }
+        /* Ajoutez des styles pour le chatbot */
+        #chat-container {
+            position: fixed;
+            bottom: 29px;
+            right: 45px;
+            width: 220px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: rgba(6, 40, 59, 0.815); /* Couleur de fond du chatbot */
+            transition: height 0.3s ease-in-out; /* Ajoute une transition fluide */
+        }
+        
+        #chat-container.closed {
+            height: 0;
+        }
+        #chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 5px;
+            background-color: rgb(6, 40, 59); /* Couleur de fond du bouton */
+            color: #fff; /* Couleur du texte du bouton */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+      
+
+          <script src="{% static 'app/js/jquery.min.js' %}"></script>
+          <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+          <script src="{% static 'app/js/slick.min.js' %}"></script>
+          <script src="{% static 'app/js/nouislider.min.js' %}"></script>
+          <script src="{% static 'app/js/jquery.zoom.min.js' %}"></script>
+          <script src="{% static 'app/js/main.js' %}"></script>
+          <script src="{% static 'app/js/myscript.js' %}"></script>
+</body>
+</html>
